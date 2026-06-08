@@ -1,4 +1,6 @@
-import os
+"""Asset path helpers for whole_body_tracking."""
 
-# Conveniences to other module directories via relative paths
-ASSET_DIR = os.path.abspath(os.path.dirname(__file__))
+from pathlib import Path
+
+# Root directory that stores robot and motion assets used by this package.
+ASSET_DIR = str(Path(__file__).resolve().parent)

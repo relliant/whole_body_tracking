@@ -285,6 +285,20 @@ class CurriculumCfg:
     pass
 
 
+@configclass
+class CommandsCfgMultiMotion(CommandsCfg):
+    """CommandsCfg variant for multi-motion / stage-distill training."""
+
+    pass
+
+
+@configclass
+class ObservationsCfgMultiMotion(ObservationsCfg):
+    """ObservationsCfg variant for multi-motion / stage-distill training."""
+
+    pass
+
+
 ##
 # Environment configuration
 ##

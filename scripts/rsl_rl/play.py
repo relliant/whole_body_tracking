@@ -19,12 +19,18 @@ parser.add_argument(
 )
 parser.add_argument("--num_envs", type=int, default=None, help="Number of environments to simulate.")
 parser.add_argument("--task", type=str, default=None, help="Name of the task.")
+parser.add_argument("--robot", type=str, default=None, choices=["g1", "tienkung"], help="Robot type; sets default task if --task is not provided.")
 parser.add_argument("--motion_file", type=str, default=None, help="Path to the motion file.")
 # append RSL-RL cli arguments
 cli_args.add_rsl_rl_args(parser)
 # append AppLauncher cli args
 AppLauncher.add_app_launcher_args(parser)
 args_cli, hydra_args = parser.parse_known_args()
+
+_ROBOT_DEFAULT_TASK = {"g1": "Tracking-Flat-G1-v0", "tienkung": "Tracking-Flat-Tienkung-v0"}
+if args_cli.task is None and args_cli.robot is not None:
+    args_cli.task = _ROBOT_DEFAULT_TASK[args_cli.robot]
+
 # always enable cameras to record video
 if args_cli.video:
     args_cli.enable_cameras = True

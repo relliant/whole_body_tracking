@@ -375,3 +375,9 @@ class MotionCommandCfg(CommandTermCfg):
 
     body_visualizer_cfg: VisualizationMarkersCfg = FRAME_MARKER_CFG.replace(prim_path="/Visuals/Command/pose")
     body_visualizer_cfg.markers["frame"].scale = (0.1, 0.1, 0.1)
+
+    # Multi-motion / stage-distill fields (optional, ignored when not set)
+    motion_files: list[str] | None = None
+    motion_selector_type: str = "adaptive"
+    use_embedding: bool = False
+    embedding_dim: int = 16
