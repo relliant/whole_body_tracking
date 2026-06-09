@@ -10,11 +10,12 @@ from whole_body_tracking.tasks.tracking.tracking_env_cfg import (
     ObservationsCfgMultiMotion,
     TrackingEnvCfg,
 )
+from whole_body_tracking.tasks.tracking.config.tienkung.tienkung_tracking_env_cfg import TienkungTrackingEnvCfg
 
 
 
 @configclass
-class TienkungFlatEnvCfg(TrackingEnvCfg):
+class TienkungFlatEnvCfg(TienkungTrackingEnvCfg):
     def __post_init__(self):
         super().__post_init__()
 
@@ -50,10 +51,10 @@ class TienkungFlatEnvCfg(TrackingEnvCfg):
         ]
 
         # 相机设置：自由视角，不跟随机器人
-        self.viewer.eye = (3.0, 3.0, 2.0)  # 相机位置
-        self.viewer.lookat = (0.0, 0.0, 1.0)  # 看向位置
-        self.viewer.origin_type = "world"  # 世界坐标系，不跟随机器人
-        self.viewer.asset_name = None  # 不绑定到特定资产
+        self.viewer.eye = (2.0, 2.0, 1.5)
+        self.viewer.lookat = (0.0, 0.0, 1.0)
+        self.viewer.origin_type = "world"
+        self.viewer.asset_name = None
 
         # 关闭调试可视化显示
         self.commands.motion.debug_vis = False  # 关闭motion命令的调试可视化
@@ -114,13 +115,3 @@ class TienkungFlatStageDistillEnvCfg(TienkungFlatEnvCfg):
             "shoulder_yaw_r_link",
             "elbow_pitch_r_link",
         ]
-
-        # Default stage1 list in env cfg; stage2 list is provided by staged runner cfg.
-        self.commands.motion.motion_files = [
-            "source/motion/tienkung_lite/npz/walk1_subject1_tienkung.npz",
-        ]
-        self.commands.motion.motion_selector_type = "uniform"
-
-        # Keep observation width stable when stage2 expands motion count.
-        self.commands.motion.use_embedding = True
-        self.commands.motion.embedding_dim = 16

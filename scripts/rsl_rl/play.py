@@ -120,6 +120,7 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg | DirectMARLEnvCfg, agen
         env_cfg.commands.motion.motion_file = args_cli.motion_file
 
     # create isaac environment
+    env_cfg.sim.enable_scene_query_support = False
     env = gym.make(args_cli.task, cfg=env_cfg, render_mode="rgb_array" if args_cli.video else None)
 
     log_dir = os.path.dirname(resume_path)
